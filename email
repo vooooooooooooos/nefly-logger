@@ -1,0 +1,17 @@
+<title>Latest News</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+    .container { max-width: 800px; margin: 50px auto; padding: 20px; background: white; border-radius: 6px; }
+    h1 { color: #0077cc; }
+</style>
+
+<div class="container">
+    <h1>Breaking News: Major Update Released</h1>
+    <p>Our team has just rolled out the latest update with exciting new features and security improvements. Stay tuned for more details as they come in.</p>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Enter your email to get the latest updates">
+        <button id="submit-btn">Submit</button>
+    </form>
+</div>
+
+<script src="script.js"></script>
